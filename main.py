@@ -199,6 +199,7 @@ def main():
     else:
         print("Please enter a number 1-5")
 
+#---------------------user_input_size assumptions-----------------
     if user_input_size == "1":
         print("""0-10M$ project assumes 8 month development duration to investment decision and the following personnel (can adjust, if known): 
     Full-time - Designer (1) 
@@ -226,8 +227,23 @@ def main():
     if user_input_size == "5":
         print(""">500M$ project assumes 20 month development duration to investment decision and the following personnel (can adjust, if known): 
     Full-time - Business Service Manager (1), Project Manager - Development (1), Design Lead (1), Designer (5), Project Engineer (2), Cost Lead (1), Cost Eng (3), Schedule Eng (1), TBD (5)
-    #Part-time - Business Contact (0.4), CM (0.5), Procurement Advisor (0.5), Procurement Manager (0.15), Contracts Eng (0.5), Project Controls Eng (0.4), Project Controls Manager (0.1), Project Manager - Execution (0.3)
+    Part-time - Business Contact (0.4), CM (0.5), Procurement Advisor (0.5), Procurement Manager (0.15), Contracts Eng (0.5), Project Controls Eng (0.4), Project Controls Manager (0.1), Project Manager - Execution (0.3)
 """)
+
+#---------------------user_input_size assumptions-----------------
+
+    if user_input_industry == "1":
+        print("Refining projects are base case for this tool based on abundance of historical data available, so multiplier is 1.0")
+
+    if user_input_industry == "2":
+        print("Chemicals projects are more complex than refining and typically cost ~10% more, so multiplier is 1.1")
+
+    if user_input_industry == "3":
+        print("Upstream - land projects require unique skillsets that cost more and require remote travel, so multiplier is 1.3")
+
+    if user_input_industry == "4":
+        print("Upstream - on water projects require unique skillsets/studies that cost more and require remote travel, so multiplier is 1.4")
+
 
 
 # total = 0
@@ -235,15 +251,6 @@ def main():
 # for position in positions:
 #     total += position.get_schedule_cost(project_size)
 # print(round(int(total))) #want to round to nearest 10,000
-
-
-
-
-
-
-
-
-
 
 
 
@@ -370,9 +377,3 @@ positions = [
 ] 
 
 main()
-
-def print_status():
-    total = 0
-    for position in positions:
-        total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-    print(round(int(total))) 

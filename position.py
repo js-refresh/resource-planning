@@ -18,8 +18,8 @@ class Position:
         multiplier = {
             "Refining" : 1,
             "Chemicals" : 1.1,
-            "Upstream - on land" : 1.2,
-            "Upstream - on water" : 1.3,
+            "Upstream - on land" : 1.3,
+            "Upstream - on water" : 1.4,
         }
         return multiplier[industry]        
 
