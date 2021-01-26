@@ -1,7 +1,23 @@
 from position import Position
 
+
 #future ideas (show cost per month in a table, cost per position, location-based multipliers)
-#add assumptions to printout
+
+project_sizes = {
+            "1": "0-10M",
+            "2": "11-40M",
+            "3": "41-100M" ,
+            "4": "101-500M",
+            "5": ">500M"
+        }
+
+industries = {
+            "1": "Refining",
+            "2": "Chemicals",
+            "3": "Upstream - on land",
+            "4": "Upstream - on water"
+        }
+
 def main():
 
     print("This tool is meant to provide budgetary estimate of internal resources needed") 
@@ -16,189 +32,33 @@ def main():
     print("> ",)
     user_input_size = input()
 
+    while user_input_size not in project_sizes.keys():
+        user_input_size = input("Please enter a number 1-5")
+
+
     print()
     print("What type of industry is your project?")
     print("1. Refining") #base case, multiply by 1.0
     print("2. Chemicals") #more complex, multiply by 1.1
-    print("3. Upstream - on land") #multiply by 1.2
-    print("4. Upstream - on water") ##multiply by 1.3
+    print("3. Upstream - on land") #multiply by 1.3
+    print("4. Upstream - on water") ##multiply by 1.4
     print("> ",)
     user_input_industry = input()
 
+    while user_input_industry not in industries.keys():
+        user_input_industry = input("Please enter a number 1-4")
 
-#---------0-10M$ projects-------------
-    if user_input_size == "1" and user_input_industry == "1":
-    #Object oriented programming!
-        total = 0
-        project_size = "0-10M"
-        industry = "Refining"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
+
+    project_size = project_sizes[user_input_size]
+    industry = industries[user_input_industry]
+    total = 0
+    for position in positions:
+        total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
+    rounded_total = int(round(total, -4)) 
+    formatted_total = "{:,}".format(rounded_total)
+    print(f"Resource planning costs are ~ {formatted_total}$. Duration and personnel assumptions below:")
+
     
-    elif user_input_size == "1" and user_input_industry == "2":
-        total = 0
-        project_size = "0-10M"
-        industry = "Chemicals"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "1" and user_input_industry == "3":
-        total = 0
-        project_size = "0-10M"
-        industry = "Upstream - on land"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "1" and user_input_industry == "4":
-        total = 0
-        project_size = "0-10M"
-        industry = "Upstream - on water"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-#---------11-40M$ projects-------------
-    elif user_input_size == "2" and user_input_industry == "1":
-        total = 0
-        project_size = "11-40M"
-        industry = "Refining"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "2" and user_input_industry == "2":
-        total = 0
-        project_size = "11-40M"
-        industry = "Chemicals"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "2" and user_input_industry == "3":
-        total = 0
-        project_size = "11-40M"
-        industry = "Upstream - on land"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "2" and user_input_industry == "4":
-        total = 0
-        project_size = "11-40M"
-        industry = "Upstream - on water"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-#---------41-100M$ projects-------------
-
-    elif user_input_size == "3" and user_input_industry == "1":
-        total = 0
-        project_size = "41-100M"
-        industry = "Refining"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "3" and user_input_industry == "2":
-        total = 0
-        project_size = "41-100M"
-        industry = "Chemicals"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "3" and user_input_industry == "3":
-        total = 0
-        project_size = "41-100M"
-        industry = "Upstream - on land"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "3" and user_input_industry == "4":
-        total = 0
-        project_size = "41-100M"
-        industry = "Upstream - on water"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-#---------101-500M$ projects-------------
-
-    elif user_input_size == "4" and user_input_industry == "1":
-        total = 0
-        project_size = "101-500M"
-        industry = "Refining"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "4" and user_input_industry == "2":
-        total = 0
-        project_size = "101-500M"
-        industry = "Chemicals"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "4" and user_input_industry == "3":
-        total = 0
-        project_size = "101-500M"
-        industry = "Upstream - on land"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "4" and user_input_industry == "4":
-        total = 0
-        project_size = "101-500M"
-        industry = "Upstream - on water"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-
-#--------->500M$ projects-------------
-
-    elif user_input_size == "5" and user_input_industry == "1":
-        total = 0
-        project_size = ">500M"
-        industry = "Refining"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "5" and user_input_industry == "2":
-        total = 0
-        project_size = ">500M"
-        industry = "Chemicals"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "5" and user_input_industry == "3":
-        total = 0
-        project_size = ">500M"
-        industry = "Upstream - on land"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    elif user_input_size == "5" and user_input_industry == "4":
-        total = 0
-        project_size = ">500M"
-        industry = "Upstream - on water"
-        for position in positions:
-            total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
-        print(f"Resource planning costs are approximately {round(total, -4)}$. Duration and personnel assumptions below:")
-
-    else:
-        print("Please enter a number 1-5")
-
 #---------------------user_input_size assumptions-----------------
     if user_input_size == "1":
         print("""0-10M$ project assumes 8 month development duration to investment decision and the following personnel (can adjust, if known): 
@@ -234,15 +94,20 @@ def main():
 
     if user_input_industry == "1":
         print("Refining projects are base case for this tool based on abundance of historical data available, so multiplier is 1.0")
+        print("<----------------------------------------------------------------------------------------------------------------->")
 
     if user_input_industry == "2":
         print("Chemicals projects are more complex than refining and typically cost ~10% more, so multiplier is 1.1")
+        print("<-------------------------------------------------------------------------------------------------->")
 
     if user_input_industry == "3":
         print("Upstream - land projects require unique skillsets that cost more and require remote travel, so multiplier is 1.3")
+        print("<-------------------------------------------------------------------------------------------------------------->")
 
     if user_input_industry == "4":
         print("Upstream - on water projects require unique skillsets/studies that cost more and require remote travel, so multiplier is 1.4")
+        print("<--------------------------------------------------------------------------------------------------------------------------->")
+
 
 
 
