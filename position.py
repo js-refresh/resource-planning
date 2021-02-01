@@ -23,5 +23,14 @@ class Position:
         }
         return multiplier[industry]        
 
+    def country_multiplier(self, country):
+        mult = {
+            "U.S. Gulf Coast" : 1.0,
+            "Canada" : 1.1,
+            "Singapore" : 0.9,
+            "UK" : 1.2,
+        }
+        return mult[country]        
+
 
 # class PM(Position):

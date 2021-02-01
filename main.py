@@ -1,7 +1,7 @@
 from position import Position
 
 
-#future ideas (show cost per month in a table, cost per position, location-based multipliers)
+#future ideas (show cost per month in a table, cost per position, location-based multipliers (done))
 
 project_sizes = {
             "1": "0-10M",
@@ -18,10 +18,17 @@ industries = {
             "4": "Upstream - on water"
         }
 
+countries = {
+            "1": "U.S. Gulf Coast",
+            "2": "Canada",
+            "3": "Singapore",
+            "4": "UK",
+        }
+
 def main():
 
     print("This tool is meant to provide budgetary estimate of internal resources needed") 
-    print("to get an oil/gas/chemicals project from concept to an investment decision:")
+    print("to get an upstream/downstream project from concept to an investment decision:")
     print("===============================================")
     print("What is the approximate project size (in M$)?")
     print("1. 0 - 10 M$ ")
@@ -48,12 +55,25 @@ def main():
     while user_input_industry not in industries.keys():
         user_input_industry = input("Please enter a number 1-4")
 
+    print()
+    print("What country is your projec in?")
+    print("1. U.S. Gulf Coast") #base case, multiply by 1.0
+    print("2. Canada") #more complex, multiply by 1.1
+    print("3. Singapore") #multiply by 0.9
+    print("4. UK") #multiply by 1.2
+    print("> ",)
+    user_input_country = input()
+
+    while user_input_country not in countries.keys():
+        user_input_country = input("Please enter a number 1-4")
+
 
     project_size = project_sizes[user_input_size]
     industry = industries[user_input_industry]
+    country = countries[user_input_country]
     total = 0
     for position in positions:
-        total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)
+        total += position.get_schedule_cost(project_size)*position.ind_multiplier(industry)*position.country_multiplier(country)
     rounded_total = int(round(total, -4)) 
     formatted_total = "{:,}".format(rounded_total)
     print(f"Resource planning costs are ~ {formatted_total}$. Duration and personnel assumptions below:")
@@ -106,7 +126,6 @@ def main():
 
     if user_input_industry == "4":
         print("Upstream - on water projects require unique skillsets/studies that cost more and require remote travel, so multiplier is 1.4")
-        print("<--------------------------------------------------------------------------------------------------------------------------->")
 
 
 
